@@ -1,0 +1,78 @@
+server:
+  port: 10588
+#  ssl:
+#    key-store: keystore.jks
+#    enabled: true
+#    key-store-password: admin123
+#    key-store-type: JkS
+#  servlet:
+#    context-path: /film
+
+#\u6570\u636E\u5E93\u914D\u7F6E
+spring:
+  datasource:
+    dynamic:
+      primary: master #����Ĭ�ϵ�����Դ��������Դ��,Ĭ��ֵ��Ϊmaster
+      strict: true #�����ϸ�ģʽ,Ĭ��false������. ��������δƥ�䵽ָ������Դʱ����׳��쳣,��������ʹ��Ĭ������Դ.
+      datasource:
+        master:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/wxcat?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&&serverTimezone=UTC
+          username: wxcat
+          password: root
+  redis:
+    host: 127.0.0.1
+    database: 0
+    password:
+    port: 6379
+    jedis:
+      pool:
+        min-idle: 1
+        max-active: -1
+        max-idle: -1
+      shutdown-timeout: 3000
+    timeout: 5000
+#  datasource:
+#    dynamic:
+#      primary: master #����Ĭ�ϵ�����Դ��������Դ��,Ĭ��ֵ��Ϊmaster
+#      strict: false #�����ϸ�ģʽ,Ĭ��false������. ��������δƥ�䵽ָ������Դʱ����׳��쳣,��������ʹ��Ĭ������Դ.
+#      datasource:
+#        master:
+#          url: jdbc:mysql://localhost:7001/abc?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=CTT
+#          username: router
+#          password: O8ljzq7q
+#          driver-class-name: com.mysql.jdbc.Driver # 3.2.0��ʼ֧��SPI��ʡ�Դ�����
+#        slave_1:
+#          url: jdbc:mysql://localhost:7002/abc?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=CTT
+#          username: router
+#          password: O8ljzq7q
+#          driver-class-name: com.mysql.jdbc.Driver
+
+#mybatis-plus\u914D\u7F6E
+mybatis-plus:
+  # \u5982\u679C\u662F\u653E\u5728src/main/java\u76EE\u5F55\u4E0B classpath:/com/yourpackage/*/mapper/*Mapper.xml
+  # \u5982\u679C\u662F\u653E\u5728resource\u76EE\u5F55 classpath:/mapper/*Mapper.xml
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  #\u5B9E\u4F53\u626B\u63CF\uFF0C\u591A\u4E2Apackage\u7528\u9017\u53F7\u6216\u8005\u5206\u53F7\u5206\u9694
+  typeAliasesPackage: com.fl.aigentdata.entity
+  global-config:
+
+    id-type: 0
+
+    field-strategy: 0
+
+    logic-delete-value: 1
+    logic-not-delete-value: 0
+
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #    #\u914D\u7F6E\u8FD4\u56DE\u6570\u636E\u5E93(column\u4E0B\u5212\u7EBF\u547D\u540D&&\u8FD4\u56DEjava\u5B9E\u4F53\u662F\u9A7C\u5CF0\u547D\u540D)\uFF0C\u81EA\u52A8\u5339\u914D\u65E0\u9700as\uFF08\u6CA1\u5F00\u542F\u8FD9\u4E2A\uFF0CSQL\u9700\u8981\u5199as\uFF1A select user_id as userId\uFF09
+    #    map-underscore-to-camel-case: true
+    cache-enabled: true
+
+#    #\u914D\u7F6EJdbcTypeForNull, oracle\u6570\u636E\u5E93\u5FC5\u987B\u914D\u7F6E
+#    jdbc-type-for-null: 'null'
+
+
+swagger:
+  enabled: true
